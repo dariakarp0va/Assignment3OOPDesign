@@ -4,5 +4,5 @@
 class TetrominoCreater {
 public:
 	TetrominoCreater();
-	Tetromino& createRandomTetromino();
+	Tetromino createRandomTetromino();
 };

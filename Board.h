@@ -14,5 +14,5 @@ public:
 	bool checkCollision();
 	int clearLines();
 	void mergeBlock();
-	void setNewTetromino(Tetromino& tetromino);
+	void setNewTetromino(const Tetromino& tetromino);
 };

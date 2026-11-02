@@ -54,7 +54,7 @@ Tetromino& Board::getCurrentBlock() {
 	return currentBlock;
 }
 
-void Board::setNewTetromino(Tetromino& tetromino) {
+void Board::setNewTetromino(const Tetromino& tetromino) {
 	currentBlock = tetromino;
 }
   
