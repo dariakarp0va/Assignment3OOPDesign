@@ -4,7 +4,7 @@
 #include <string>
 #include <optional>
 
-Renderer::Renderer(){}
+
 Renderer::Renderer()
     : window(sf::VideoMode({ 300, 600 }), "Tetris"),
     fontLoaded(font.openFromFile("arial.ttf"))     
@@ -36,8 +36,39 @@ void Renderer::processEvents(GameEngine& game) {
             else if (keyPressed->code == sf::Keyboard::Key::S) {
                 game.SpeedUpTetromino();
             }
+            else if (keyPressed->code == sf::Keyboard::Key::W) {
+                game.rotateTetromino();
+            }
+            else if (keyPressed->code == sf::Keyboard::Key::Escape) { 
+                game.SaveGame();
+                window.close();
+            }
         }
     }
+}
+void Renderer::processEventsInMenu(GameEngine& game) {
+    bool inMenu = true;
+    while (const std::optional<sf::Event> event = window.pollEvent())
+    {
+        if (!inMenu) {
+            break;
+        }
+        else if (event->is<sf::Event::Closed>())
+        {
+            window.close();
+        }
+        else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
+        {
+            if (keyPressed->code == sf::Keyboard::Key::Escape) {
+                 window.close();
+            }
+            else if (keyPressed->code == sf::Keyboard::Key::Escape) {
+                game.SaveGame();
+                window.close();
+            }
+        }
+    }
+    
 }
 void Renderer::render(GameEngine& game) {
 
@@ -47,8 +78,9 @@ void Renderer::renderMainMenu(GameEngine& game) {
 }
 
 void Renderer::mainMenu(GameEngine& game) {
-    while (true) {
-        processEvents(game);
+    while (window.isOpen()) {
+        processEventsInMenu(game);
+        renderMainMenu(game);
     }
 }
 void Renderer::drawBoard(const Board& board) {
