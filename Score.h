@@ -10,4 +10,5 @@ public:
 	void saveBestScore();
 	void loadBestScore();
 	int showBestScore();
+	int showCurrentScore();
 };

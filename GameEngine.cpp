@@ -60,3 +60,10 @@ void GameEngine::SaveGame() {
 void GameEngine::LoadGame() {
     score.loadBestScore();
 }
+
+Board& GameEngine::getBoard() { 
+    return board;
+}
+Score& GameEngine::getScore() {
+    return score; 
+}

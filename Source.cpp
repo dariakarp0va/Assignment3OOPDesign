@@ -131,7 +131,7 @@ public:
         cellSize(windowSize / 3),
         window(sf::VideoMode({ static_cast<unsigned int>(windowSize), static_cast<unsigned int>(windowSize) }), "Tic-Tac-Toe"),
         font(),
-        fontLoaded(font.openFromFile("/System/Library/Fonts/Supplemental/Arial.ttf")) 
+        fontLoaded(font.openFromFile("C:\brbbr\arial.ttf"))
     {
         window.setFramerateLimit(60);
     }

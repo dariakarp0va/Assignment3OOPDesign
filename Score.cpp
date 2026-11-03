@@ -55,3 +55,7 @@ void Score::loadBestScore() {
 int Score::showBestScore() {
 	return bestScore;
 }
+
+int Score::showCurrentScore() {
+    return currentScore;
+}
