@@ -1,6 +1,7 @@
 #include "Tetromino.h"
 
-Tetromino::Tetromino(std::vector<std::vector<int>> type = { {0} }) {
+Tetromino::Tetromino(std::vector<std::vector<int>> type) {
+	tetrominoType = type;
 	x = 5;
 	y = 0;
 }

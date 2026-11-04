@@ -6,10 +6,12 @@ Board::Board() : grid(BOARD_HEIGHT, std::vector<int>(BOARD_WIDTH, 0)), currentBl
 bool Board::checkCollision() {
 	std::vector<std::vector<int>> type = currentBlock.getType();
 
-	for (int i = currentBlock.getX(); i < currentBlock.getX() + type.size(); i++) {
-		for (int j = currentBlock.getY(); j < currentBlock.getY() + type.size(); j++) {
-			if (type[j - currentBlock.getY()][i - currentBlock.getX()] != 0) {
-				if ( i >= BOARD_WIDTH || j >= BOARD_HEIGHT || i < 0 || j < 0 ||  grid[j][i] != 0){
+	for (int i = 0; i < type.size(); i++) {
+		for (int j = 0; j < type.size(); j++) {
+			if (type[i][j] != 0) {
+				int onGridX = j + currentBlock.getX();
+				int onGridY = i + currentBlock.getY();
+				if (onGridX >= BOARD_WIDTH || onGridY >= BOARD_HEIGHT || onGridX < 0 || onGridY < 0 || grid[onGridY][onGridX] != 0) {
 					return true;
 				}
 			}
@@ -56,5 +58,9 @@ Tetromino& Board::getCurrentBlock() {
 
 void Board::setNewTetromino(const Tetromino& tetromino) {
 	currentBlock = tetromino;
+}
+
+std::vector<std::vector<int>> Board::getGrid() const{
+	return grid;
 }
   

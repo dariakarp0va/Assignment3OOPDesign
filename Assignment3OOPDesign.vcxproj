@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Source.cpp" />

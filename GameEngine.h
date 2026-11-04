@@ -10,7 +10,6 @@ private:
 	Score score;
 	TetrominoCreater creater;
 	bool isGameOver = 0;
-	const float blockSize = 30.f;
 public:
 	GameEngine();
 	void startGame();
