@@ -2,24 +2,32 @@
 #include "Board.h"
 #include "TetrominoCreater.h"
 #include "Score.h"
-
+#include "IGameState.h"
+#include <memory>
 
 class GameEngine {
 private:
 	Board board;
 	Score score;
 	TetrominoCreater creater;
-	bool isGameOver = 0;
+	std::unique_ptr<IGameState> state;
+
+	void setState(std::unique_ptr<IGameState> newState);
+
 public:
 	GameEngine();
 	void startGame();
 	void moveTetromino(int direction);
 	void rotateTetromino();
-	void clearLines();
 	void SpeedUpTetromino();
 	void SaveGame();
 	void LoadGame();
-	bool getGameStatus();
 	const Board& getBoard() const;
-	Score& getScore();
+	const Score& getScore() const;
+	GameState getState() const;
+
+	void tryMove(int dir);
+	void tryRotate();
+	void trySpeedUp();
+	void tryStart();
 };

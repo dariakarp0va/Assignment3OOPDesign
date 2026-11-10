@@ -7,9 +7,7 @@
 
 class Renderer {
 private:
-    const std::uint16_t windowWidth = 400; 
-    const std::uint16_t windowHeigth = 750;
-    const int TetrominoSize = 30;
+    
     bool inMenu = true;
 
     sf::RenderWindow window;
@@ -20,13 +18,15 @@ private:
     void processEvents(GameEngine& game);
     void render(GameEngine& game);
     void renderMainMenu(GameEngine& game);
-    void processEventsInMenu(GameEngine& game);
     void handleRowPress(GameEngine& game);
     void drawTetromino(const Tetromino& currentBlock);
+    void renderGameOver(GameEngine& game);
+    void renderGame(GameEngine& game);
 
 public:
     Renderer();
-    void mainMenu(GameEngine& game);
     void drawBoard(const Board& board);
+    void run(GameEngine& game);
+
 };
 

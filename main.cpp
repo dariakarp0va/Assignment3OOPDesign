@@ -11,6 +11,6 @@ int main(){
 	GameEngine game;
 	Renderer renderer;
 
-	renderer.mainMenu(game);
+	renderer.run(game);
 	return 0;
 }

@@ -9,7 +9,7 @@ public:
 	void addPoints(int linesCleared);
 	void saveBestScore();
 	void loadBestScore();
-	int showBestScore();
-	int showCurrentScore();
+	int showBestScore() const;
+	int showCurrentScore() const;
 	void resetCurrentScore();
 };

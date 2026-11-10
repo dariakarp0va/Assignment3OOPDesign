@@ -78,11 +78,11 @@ void Score::loadBestScore() {
     std::getline(inFile, line);
     bestScore = convertIntoDigit(line);
 }
-int Score::showBestScore() {
+int Score::showBestScore() const{
 	return bestScore;
 }
 
-int Score::showCurrentScore() {
+int Score::showCurrentScore() const{
     return currentScore;
 }
 

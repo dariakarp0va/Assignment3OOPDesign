@@ -144,7 +144,10 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="PlayingState.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Tetromino.cpp" />
@@ -154,6 +157,10 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="const.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GameOverState.h" />
+    <ClInclude Include="IGameState.h" />
+    <ClInclude Include="MenuState.h" />
+    <ClInclude Include="PlayingState.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Tetromino.h" />
