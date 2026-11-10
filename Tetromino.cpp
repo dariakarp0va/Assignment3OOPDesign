@@ -35,14 +35,14 @@ void Tetromino::speedUp() {
 }
 
 
-int Tetromino::getX() {
+int Tetromino::getX() const{
 	return x;
 }
 
-int Tetromino::getY() {
+int Tetromino::getY() const{
 	return y;
 }
 
-std::vector<std::vector<int>> Tetromino::getType() {
+const std::vector<std::vector<int>> Tetromino::getType() const{
 	return tetrominoType;
 }

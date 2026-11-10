@@ -14,7 +14,7 @@ bool Board::checkCollision() {
 				if (onGridX >= BOARD_WIDTH || onGridY >= BOARD_HEIGHT || onGridX < 0 || onGridY < 0 || grid[onGridY][onGridX] != 0) {
 					return true;
 				}
-			}
+			}       
 		}
 	}
 	return false;
@@ -43,16 +43,22 @@ int Board::clearLines() {
 void Board::mergeBlock() {
 	std::vector<std::vector<int>> type = currentBlock.getType();
 
-	for (int i = currentBlock.getX(); i < currentBlock.getX() + type.size(); i++) {
-		for (int j = currentBlock.getY(); j < currentBlock.getY() + type.size(); j++) {
-			if (type[j - currentBlock.getY()][i - currentBlock.getX()] != 0) {
-				grid[j][i] = type[j - currentBlock.getY()][i - currentBlock.getX()];
+	
+	for (int i = 0; i < type.size(); i++) {
+		for (int j = 0; j < type.size(); j++) {
+			if (type[i][j] != 0) {
+				int onGridX = j + currentBlock.getX();
+				int onGridY = i + currentBlock.getY();
+				grid[onGridY][onGridX] = type[i][j];
 			}
 		}
 	}
 }
 
 Tetromino& Board::getCurrentBlock() {
+	return currentBlock;
+}
+const Tetromino& Board::getCurrentBlock() const {
 	return currentBlock;
 }
 

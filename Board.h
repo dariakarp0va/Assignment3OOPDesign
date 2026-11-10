@@ -11,6 +11,7 @@ private:
 public:
 	Board();
 	Tetromino& getCurrentBlock();
+	const Tetromino& getCurrentBlock() const;
 	std::vector<std::vector<int>> getGrid() const;
 	bool checkCollision();
 	int clearLines();

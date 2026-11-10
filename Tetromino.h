@@ -11,7 +11,7 @@ public:
 	void rotate();
 	void move(int x_, int y_);
 	void speedUp();
-	int getX();
-	int getY();
-	std::vector<std::vector<int>> getType();
+	int getX() const;
+	int getY() const;
+	const std::vector<std::vector<int>> getType() const;
 };

@@ -19,6 +19,7 @@ public:
 	void SpeedUpTetromino();
 	void SaveGame();
 	void LoadGame();
-	Board& getBoard();
+	bool getGameStatus();
+	const Board& getBoard() const;
 	Score& getScore();
 };

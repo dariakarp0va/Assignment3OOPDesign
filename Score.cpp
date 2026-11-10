@@ -2,8 +2,35 @@
 #include <fstream>
 #include "Score.h"
 
-int convertIntoDigit(std::string lineNum);
 
+int convertIntoDigit(std::string lineNum)
+{
+    bool isDigit = false;
+    while (!isDigit)
+    {
+        bool isSymbolDigit = true;
+        for (int i = 0; i < lineNum.length(); i++)
+        {
+            if (!isdigit(lineNum[i]))
+            {
+                isSymbolDigit = false;
+            }
+        }
+        isDigit = isSymbolDigit;
+        if (isDigit == false)
+        {
+            printf("input should be numeric \n");
+            return -1;
+        }
+    }
+    try {
+        return std::stoi(lineNum);
+    }
+    catch (const std::exception& e) {
+        printf("number is too large\n");
+        return -1;
+    }
+}
 
 void Score::addPoints(int linesCleared) {
     switch (linesCleared) {
@@ -39,7 +66,6 @@ void Score::saveBestScore() {
         return;
     }
     outFile << bestScore;
-    outFile << "end";
     outFile << "\n";
 }
 void Score::loadBestScore() {
@@ -58,4 +84,8 @@ int Score::showBestScore() {
 
 int Score::showCurrentScore() {
     return currentScore;
+}
+
+void Score::resetCurrentScore() {
+    currentScore = 0;
 }

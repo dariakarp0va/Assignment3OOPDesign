@@ -7,6 +7,7 @@ std::mt19937 gen(rd());
 
 enum Types {
 	i_block = 1,
+
 	z_block,
 	s_block,
 	l_block,

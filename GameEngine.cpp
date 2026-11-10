@@ -5,8 +5,16 @@
 GameEngine::GameEngine() {
 }
 void GameEngine::startGame() {
+    board = Board();
+    score = Score();
     isGameOver = false;
+    score.loadBestScore();
     board.setNewTetromino(creater.createRandomTetromino());
+    if (board.checkCollision()) {
+        isGameOver = true;
+        SaveGame();
+        score.resetCurrentScore();
+    }
 }
 
 void GameEngine::moveTetromino(int direction) {
@@ -48,22 +56,31 @@ void GameEngine::SpeedUpTetromino() {
 
         board.setNewTetromino(creater.createRandomTetromino());
 
+        if (board.checkCollision()) {
+            isGameOver = true;
+            SaveGame();
+            score.resetCurrentScore();
+        }
+
 
     }
 }
 
 void GameEngine::SaveGame() {
     score.saveBestScore();
-    
 }
 
 void GameEngine::LoadGame() {
     score.loadBestScore();
 }
 
-Board& GameEngine::getBoard() { 
+const Board& GameEngine::getBoard() const { 
     return board;
 }
 Score& GameEngine::getScore() {
     return score; 
+}
+
+bool GameEngine::getGameStatus() {
+    return isGameOver;
 }

@@ -6,7 +6,7 @@
 
 
 Renderer::Renderer()
-    : window(sf::VideoMode({ 300, 750 }), "Tetris"),
+    : window(sf::VideoMode({ windowWidth, windowHeigth}), "Tetris"),
     fontLoaded(font.openFromFile("C:\\brbbr\\arial.ttf"))     
 {
     window.setFramerateLimit(60);
@@ -17,7 +17,7 @@ void Renderer::startGame(GameEngine& game) {
     float timer = 0.f;
     float delay = 1.f;
 
-    while (window.isOpen()) {
+    while (window.isOpen() && !(game.getGameStatus())) {
         float time = clock.getElapsedTime().asSeconds();
         clock.restart();
         timer += time;
@@ -29,6 +29,8 @@ void Renderer::startGame(GameEngine& game) {
             timer = 0.f;
         }
         render(game);
+
+        
     }
 }
 void Renderer::processEvents(GameEngine& game) {
@@ -182,7 +184,7 @@ void Renderer::drawBoard(const Board& board) {
 
     
 }
-void Renderer::drawTetromino(Tetromino& currentBlock) {
+void Renderer::drawTetromino(const Tetromino& currentBlock) {
 
     for (int i = 0; i < currentBlock.getType().size(); i++) {
         for (int j = 0; j < currentBlock.getType().size(); j++) {

@@ -11,4 +11,5 @@ public:
 	void loadBestScore();
 	int showBestScore();
 	int showCurrentScore();
+	void resetCurrentScore();
 };
