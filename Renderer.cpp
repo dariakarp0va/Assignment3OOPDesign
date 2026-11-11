@@ -7,7 +7,7 @@
 
 Renderer::Renderer()
     : window(sf::VideoMode({ windowWidth, windowHeigth}), "Tetris"),
-    fontLoaded(font.openFromFile("C:\\brbbr\\arial.ttf"))     
+    fontLoaded(font.openFromFile("arial.ttf"))     
 {
     window.setFramerateLimit(60);
 }
