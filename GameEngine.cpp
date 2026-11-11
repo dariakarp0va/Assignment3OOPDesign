@@ -2,8 +2,6 @@
 #include"PlayingState.h"
 #include"MenuState.h"
 #include"GameOverState.h"
-#include <sstream>
-#include <fstream>
 
 GameEngine::GameEngine(): state(std::make_unique<MenuState>()) {
 

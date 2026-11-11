@@ -56,8 +56,6 @@ void Renderer::run(GameEngine& game) {
         if (game.getState() == GameState::Playing) {
             timer += time;
 
-            processEvents(game);
-
             if (timer > delay) {
                 game.SpeedUpTetromino();
                 timer = 0.f;
