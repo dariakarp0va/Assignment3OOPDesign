@@ -11,33 +11,13 @@ Renderer::Renderer()
 {
     window.setFramerateLimit(60);
 }
-void Renderer::startGame(GameEngine& game) {
-    game.startGame();
-    sf::Clock clock;
-    float timer = 0.f;
-    float delay = 1.f;
 
-    while (window.isOpen() && game.getState() == GameState::Playing) {
-        float time = clock.getElapsedTime().asSeconds();
-        clock.restart();
-        timer += time;
-
-        processEvents(game);
-
-        if (timer > delay) {
-            game.SpeedUpTetromino();
-            timer = 0.f;
-        }
-        render(game);
-
-        
-    }
-}
 void Renderer::processEvents(GameEngine& game) {
     while (const std::optional<sf::Event> event = window.pollEvent())
     {
         if (event->is<sf::Event::Closed>())
         {
+            game.SaveGame();
             window.close();
         }
         else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
@@ -60,7 +40,7 @@ void Renderer::processEvents(GameEngine& game) {
                 window.close();
             }
             else if (keyPressed->code == sf::Keyboard::Key::Space) {
-                startGame(game);
+                game.startGame();
             }
         }
     }
@@ -68,8 +48,26 @@ void Renderer::processEvents(GameEngine& game) {
 
 void Renderer::run(GameEngine& game) {
     while (window.isOpen()) {
-        render(game);
+        float time = clock.getElapsedTime().asSeconds();
+        clock.restart();
+
         processEvents(game);
+
+        if (game.getState() == GameState::Playing) {
+            timer += time;
+
+            processEvents(game);
+
+            if (timer > delay) {
+                game.SpeedUpTetromino();
+                timer = 0.f;
+            }
+
+
+        }
+
+        render(game);
+
     }
 }
 
@@ -78,11 +76,17 @@ void Renderer::renderGame(GameEngine& game){
 
     if (fontLoaded) {
         sf::Text scores(font);
+        sf::Text BestScore(font);
         scores.setCharacterSize(25);
         scores.setFillColor(sf::Color::White);
-        scores.setString("SCORE: " + std::to_string(game.getScore().showCurrentScore()) + "    BEST: " + std::to_string(game.getScore().showBestScore()));
-        scores.setPosition(sf::Vector2f(10.f, 35.f));
+        scores.setString("SCORE: " + std::to_string(game.getScore().showCurrentScore()));
+        scores.setPosition(sf::Vector2f(40.f, 35.f));
         window.draw(scores);
+        BestScore.setCharacterSize(25);
+        BestScore.setFillColor(sf::Color::White);
+        BestScore.setString("BEST: " + std::to_string(game.getScore().showBestScore()));
+        BestScore.setPosition(sf::Vector2f(240.f, 35.f));
+        window.draw(BestScore);
     }
 
     drawBoard(game.getBoard());
@@ -98,13 +102,27 @@ void Renderer::renderGameOver(GameEngine& game) {
     text.setCharacterSize(30);
     text.setFillColor(sf::Color::White);
     text.setString("GAME OVER");
-    text.setPosition(sf::Vector2f(46.f, 40.f));
+    text.setPosition(sf::Vector2f(110.f, 40.f));
 
     sf::Text start(font);
     start.setCharacterSize(25);
     start.setFillColor(sf::Color::White);
     start.setString("Press SPACE to restart the game");
-    start.setPosition(sf::Vector2f(46.f, 150.f));
+    start.setPosition(sf::Vector2f(15.f, 150.f));
+
+    sf::Text BestScore(font);
+    BestScore.setCharacterSize(25);
+    BestScore.setFillColor(sf::Color::White);
+    BestScore.setString("BEST: " + std::to_string(game.getScore().showBestScore()));
+    BestScore.setPosition(sf::Vector2f(140.f, 300.f));
+    window.draw(BestScore);
+
+    sf::Text scores(font);
+    scores.setCharacterSize(25);
+    scores.setFillColor(sf::Color::White);
+    scores.setString("SCORE: " + std::to_string(game.getScore().showCurrentScore()));
+    scores.setPosition(sf::Vector2f(140.f, 340.f));
+    window.draw(scores);
 
     window.draw(text);
     window.draw(start);
@@ -116,13 +134,20 @@ void Renderer::renderMainMenu(GameEngine& game) {
     text.setCharacterSize(30);
     text.setFillColor(sf::Color::White);
     text.setString("TETRIS");
-    text.setPosition(sf::Vector2f(46.f, 40.f));
+    text.setPosition(sf::Vector2f(150.f, 40.f));
+
+    sf::Text BestScore(font);
+    BestScore.setCharacterSize(25);
+    BestScore.setFillColor(sf::Color::White);
+    BestScore.setString("BEST: " + std::to_string(game.getScore().showBestScore()));
+    BestScore.setPosition(sf::Vector2f(140.f, 300.f));
+    window.draw(BestScore);
 
     sf::Text start(font);
     start.setCharacterSize(25);
     start.setFillColor(sf::Color::White);
     start.setString("Press SPACE to start the game");
-    start.setPosition(sf::Vector2f(46.f, 150.f));
+    start.setPosition(sf::Vector2f(20.f, 150.f));
 
     window.draw(text);
     window.draw(start);

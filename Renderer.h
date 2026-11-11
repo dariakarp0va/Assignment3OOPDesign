@@ -14,7 +14,10 @@ private:
     sf::Font font;
     bool fontLoaded;
 
-    void startGame(GameEngine& game);
+    sf::Clock clock;
+    float timer = 0.f;
+    const float delay = 1.f;
+
     void processEvents(GameEngine& game);
     void render(GameEngine& game);
     void renderMainMenu(GameEngine& game);
