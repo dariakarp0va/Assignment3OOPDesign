@@ -76,7 +76,14 @@ void Score::loadBestScore() {
     }
     std::string line;
     std::getline(inFile, line);
-    bestScore = convertIntoDigit(line);
+    int score = convertIntoDigit(line);
+    if (score > 0) {
+        bestScore = score;
+    }
+    else {
+        bestScore = 0;
+    }
+    
 }
 int Score::showBestScore() const{
 	return bestScore;
